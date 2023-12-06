@@ -1,14 +1,24 @@
+using FlightBooking.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+builder.Services.AddDbContext<DatabaseContext>(options =>
 {
-    option.LoginPath = "/Access/Login";
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    //options.UseLazyLoadingProxies();
+});
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+    options.Cookie.Name = "FlightBookingAuth";
     //Login expire time
-    option.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+    options.ExpireTimeSpan = TimeSpan.FromDays(3);
+    options.LoginPath = "/Access/Login";
+    options.LogoutPath = "/Index/Home";
+    options.AccessDeniedPath = "/";
 });
 
 var app = builder.Build();
@@ -25,7 +35,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 
 app.UseAuthentication();
 
