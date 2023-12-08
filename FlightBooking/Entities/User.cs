@@ -11,16 +11,20 @@ namespace FlightBooking.Entities
 
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
-        [Required]
-        [StringLength(50)]
-        public string Surname { get; set; }
+        public string FullName { get; set; }
+
         [Required]
         [StringLength(50)]
         public string Email { get; set; }
+
         [Required]
         [StringLength(50)]
         public string Password { get; set; }
+
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        [Required]
+        [StringLength(50)]
+        public string Role { get; set; } = "user";
     }
 }

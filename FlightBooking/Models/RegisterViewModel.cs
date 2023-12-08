@@ -21,13 +21,9 @@ namespace FlightBooking.Models
         [Compare(nameof(Password), ErrorMessage = "Passwords must match.")]
         public string RePassword { get; set; }
 
-        [Required(ErrorMessage = "Your first name is required.")]
-        [MinLength(2, ErrorMessage = "Your name must be at least 2 characters.")]
-        public string Name { get; set; }
-
-        [Required(ErrorMessage = "Your surname is required.")]
-        [MinLength(2, ErrorMessage = "Your name must be at least 2 characters.")]
-        public string Surname { get; set; }
+        [Required(ErrorMessage = "Your full name is required.")]
+        [MinLength(5, ErrorMessage = "Your name must be at least 5 characters.")]
+        public string FullName { get; set; }
 
     }
 }

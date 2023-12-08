@@ -16,9 +16,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.Cookie.Name = "FlightBookingAuth";
     //Login expire time
     options.ExpireTimeSpan = TimeSpan.FromDays(3);
-    options.LoginPath = "/Access/Login";
-    options.LogoutPath = "/Index/Home";
-    options.AccessDeniedPath = "/";
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.AccessDeniedPath = "/Home/AccessDenied";
 });
 
 var app = builder.Build();

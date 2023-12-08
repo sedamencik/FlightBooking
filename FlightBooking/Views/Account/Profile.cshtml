@@ -1,0 +1,60 @@
+﻿@using System.Security.Claims;
+@model ChangePasswordViewModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="row">
+    <div class="col-4 offset-4">
+        <h1 class="display-4 border-bottom text-center pb-2"> @ViewData["Title"]  </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-4 offset-4">
+        <div class="mb-4">
+            <div asp-validation-summary="All" class="text-danger small"></div>
+        </div>
+        <form asp-action="ProfileChangeFullName" method="post">
+
+            <div class="form-group">
+                <label class="form-label small">First Name / Last Name</label>
+                <div class="input-group mb-3">
+                    <input name="fullname" type="text" class="form-control" placeholder="First / Last Name" value="@ViewData["FullName"]">
+                    <button class="btn btn-outline-secondary" type="submit">Save<i class="fa-solid fa-check ms-1"></i></button>
+                </div>
+            </div>
+
+        </form>
+        <form asp-action="ProfileChangePassword" method="post">
+
+            <div class="form-group">
+                <label asp-for="OldPassword" class="form-label small">Old Password</label>
+                <div class="mb-3">
+                    <input asp-for="OldPassword" type="password" class="form-control">
+                    <span asp-validation-for="OldPassword" class="text-danger small"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="NewPassword" class="form-label small">New Password</label>
+                <div class="mb-3">
+                    <input asp-for="NewPassword" type="password" class="form-control">
+                    <span asp-validation-for="NewPassword" class="text-danger small"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="NewRePassword" class="form-label small">Confirm New Password</label>
+                <div class="mb-3">
+                    <input asp-for="NewRePassword" type="password" class="form-control">
+                    <span asp-validation-for="NewRePassword" class="text-danger small"></span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Change Password</button>
+            @if(ViewData["result"] != null && ViewData["result"] == "PasswordChanged")
+            {
+                <span class="text-success small">Your password has been updated successfully.</span>
+            }
+        </form>
+    </div>
+</div>
+
