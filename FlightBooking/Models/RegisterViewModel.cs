@@ -10,13 +10,13 @@ namespace FlightBooking.Models
 
         //[DataType(DataType.Password)]
         [Required(ErrorMessage = "Password is required.")]
-        [MinLength(8, ErrorMessage = "Minimum password length is 8 characters.")]
+        [MinLength(3, ErrorMessage = "Minimum password length is 3 characters.")]
         [MaxLength(20, ErrorMessage = "Maximum password lenght is 20 characters.")]
         public string Password { get; set; }
 
         //[DataType(DataType.Password)]
         [Required(ErrorMessage = "Confirm your password.")]
-        [MinLength(8, ErrorMessage = "Minimum password length is 8 characters.")]
+        [MinLength(3, ErrorMessage = "Minimum password length is 3 characters.")]
         [MaxLength(20, ErrorMessage = "Maximum password lenght is 20 characters.")]
         [Compare(nameof(Password), ErrorMessage = "Passwords must match.")]
         public string RePassword { get; set; }

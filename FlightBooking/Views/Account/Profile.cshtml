@@ -15,46 +15,52 @@
         <div class="mb-4">
             <div asp-validation-summary="All" class="text-danger small"></div>
         </div>
-        <form asp-action="ProfileChangeFullName" method="post">
+        <form asp-action="ProfileChangeFullName" class="form-floating" method="post">
 
-            <div class="form-group">
-                <label class="form-label small">First Name / Last Name</label>
-                <div class="input-group mb-3">
+            <div class="input-group mb-3">
+                <div class="form-floating flex-grow-1">
                     <input name="fullname" type="text" class="form-control" placeholder="First / Last Name" value="@ViewData["FullName"]">
-                    <button class="btn btn-outline-secondary" type="submit">Save<i class="fa-solid fa-check ms-1"></i></button>
+                    <label for="fullname" class="form-label small">First Name / Last Name</label>
                 </div>
+                <button class="btn btn-outline-primary" type="submit">Save<i class="fa-solid fa-check ms-1"></i></button>
             </div>
 
         </form>
-        <form asp-action="ProfileChangePassword" method="post">
+        <form asp-action="ProfileChangePassword" class="form-floating" method="post">
 
-            <div class="form-group">
+            <div class="form-group form-floating mb-2">
+                <input asp-for="OldPassword" type="password" class="form-control" placeholder="Old Password">
                 <label asp-for="OldPassword" class="form-label small">Old Password</label>
-                <div class="mb-3">
-                    <input asp-for="OldPassword" type="password" class="form-control">
-                    <span asp-validation-for="OldPassword" class="text-danger small"></span>
-                </div>
             </div>
-            <div class="form-group">
+
+            <div class="form-group form-floating mb-2">
+                <input asp-for="NewPassword" type="password" class="form-control" placeholder="New Password">
                 <label asp-for="NewPassword" class="form-label small">New Password</label>
-                <div class="mb-3">
-                    <input asp-for="NewPassword" type="password" class="form-control">
-                    <span asp-validation-for="NewPassword" class="text-danger small"></span>
-                </div>
+
             </div>
-            <div class="form-group">
+
+            <div class="form-group form-floating mb-2">
+                <input asp-for="NewRePassword" type="password" class="form-control" placeholder="Confirm New Password">
                 <label asp-for="NewRePassword" class="form-label small">Confirm New Password</label>
-                <div class="mb-3">
-                    <input asp-for="NewRePassword" type="password" class="form-control">
-                    <span asp-validation-for="NewRePassword" class="text-danger small"></span>
-                </div>
             </div>
             <button type="submit" class="btn btn-primary">Change Password</button>
-            @if(ViewData["result"] != null && ViewData["result"] == "PasswordChanged")
-            {
-                <span class="text-success small">Your password has been updated successfully.</span>
-            }
         </form>
     </div>
 </div>
-
+@section Scripts{
+    @if (ViewData["result"] != null)
+    {
+        if (ViewData["result"] == "PasswordChanged")
+        {
+            <script>
+                toastr["success"]("Your password has updated successfully.", "Success")
+            </script>
+        }
+        else if (ViewData["result"] == "FullNameChanged")
+        {
+            <script>
+                toastr["success"]("Your first and last name has updated successfully.", "Success!")
+            </script>
+        }
+    }
+}

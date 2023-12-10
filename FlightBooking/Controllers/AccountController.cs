@@ -122,7 +122,9 @@ namespace FlightBooking.Controllers
                 user.FullName = fullname;
 
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Profile));
+                ViewData["result"] = "FullNameChanged";
+                LoadProfileData();
+                return View(nameof(Profile));
             }
             LoadProfileData();
             return View(nameof(Profile));
@@ -140,6 +142,7 @@ namespace FlightBooking.Controllers
                     if (model.OldPassword != user.Password)
                     {
                         ModelState.AddModelError("", "Your old password is incorrect.");
+                        LoadProfileData();
                         return View(nameof(Profile));
                     }
                     else
@@ -148,7 +151,8 @@ namespace FlightBooking.Controllers
 
                         _context.SaveChanges();
                         ViewData["result"] = "PasswordChanged";
-                        return RedirectToAction(nameof(Profile));
+                        LoadProfileData();
+                        return View(nameof(Profile));
                     }
 
                 }

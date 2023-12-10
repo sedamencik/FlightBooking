@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - H51BTagHelper</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/toastr.js/toastr.min.css" rel="stylesheet" />
     <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FlightBooking.styles.css" asp-append-version="true" />
@@ -13,7 +14,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
+            <div class="container-fluid ">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Unicorn</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -24,10 +25,24 @@
 
                         @if (User.Identity.IsAuthenticated)
                         {
-                            if (User.IsInRole("admin")){
-                            <li class="nav-item ">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Control Panel<i class="fa-solid fa-user-tie ms-2"></i></a>
-                            </li>
+                            if (User.IsInRole("admin"))
+                            {
+                                <li class="nav-item">
+                                    <a asp-action="Index" asp-controller="Admin" class="nav-link text-dark" role="button">
+                                        Control Panel<i class="fa-solid fa-user-tie ms-2"></i>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a asp-action="Index" asp-controller="Admin" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Control Panel<i class="fa-solid fa-user-tie ms-2"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a asp-action="Index" asp-controller="User" class="dropdown-item">Users</a></li>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
                             }
                             <li class="nav-item ms-auto">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Profile"> @User.FindFirstValue(ClaimTypes.Name) <i class="fa-solid fa-user ms-2"></i></a>
@@ -35,16 +50,16 @@
                             <li class="nav-item ">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Log out<i class="fa-solid fa-right-from-bracket ms-2"></i></a>
                             </li>
-                        } 
+                        }
                         else
                         {
-                        <li class="nav-item ms-auto">
+                            <li class="nav-item ms-auto">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Üye Ol</a>
-                        </li>
-                        <li class="nav-item">
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Giriş Yap<i class="fa-solid fa-user ms-2"></i></a>
-                        </li>
-                            
+                            </li>
+
                         }
                     </ul>
                 </div>
@@ -65,6 +80,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/toastr.js/toastr.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

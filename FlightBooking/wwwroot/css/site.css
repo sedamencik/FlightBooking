@@ -16,3 +16,22 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.rounded-half {
+    border-radius: 15%;
+}
+
+.validation-summary-errors {
+    position: relative;
+    padding: 1rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+}
+    .validation-summary-errors ul {
+        color: #842029;
+        margin:0px;
+    }
+
