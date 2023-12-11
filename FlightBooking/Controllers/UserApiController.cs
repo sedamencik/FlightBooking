@@ -16,11 +16,12 @@ namespace FlightBooking.Controllers
             _context = context;
         }
 
-        // GET: api/user
+
+        // GET: api/user/getall
         [HttpGet]
-        public async Task<ActionResult<List<UserViewModel>>> GetAll()
+        public async Task<ActionResult<List<User>>> GetAll()
         {
-            var users = await _context.Users.Select(x => new UserViewModel { Email = x.Email, FullName = x.FullName, Id = x.Id, Role = x.Role }).ToListAsync();
+            var users = await _context.Users.ToListAsync();
             if (users is null)
             {
                 return NoContent();
@@ -29,25 +30,20 @@ namespace FlightBooking.Controllers
 
         }
 
-        // GET api/user/5
+        // GET api/user/get/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserViewModel>> Get(Guid id)
+        public async Task<ActionResult<User>> Get(Guid id)
         {
             User? u = await _context.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (u is null)
             {
                 return NoContent();
             }
-            UserViewModel userVM = new UserViewModel
-            {
-                Email = u.Email,
-                FullName = u.FullName,
-                Id = u.Id,
-            };
-            return userVM;
+
+            return u;
         }
 
-        // POST api/user
+        // POST api/user/create
         [HttpPost]
         public async Task<ActionResult<User>> Create([FromBody] User user)
         {
@@ -57,10 +53,10 @@ namespace FlightBooking.Controllers
         }
 
         // PUT api/user/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, [FromBody] UserViewModel user)
+        [HttpPut]
+        public async Task<IActionResult> Edit([FromBody] EditUserViewModel user)
         {
-            User? u = await _context.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
+            User? u = await _context.Users.Where(x => x.Id == user.Id).FirstOrDefaultAsync();
             if (u is null)
             {
                 return NotFound();

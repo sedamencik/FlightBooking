@@ -48,10 +48,29 @@
 </div>
 
 @section Scripts{
+
+    @if (TempData["error"] != null)
+    {
+        <script>
+            toastr["error"]("Something went wrong!", "Error")
+        </script>
+    }
     @if (TempData["created"] != null)
     {
         <script>
             toastr["success"]("User created successfully!", "Success")
+        </script>
+    }
+    @if (TempData["edited"] != null)
+    {
+        <script>
+            toastr["info"]("User updated successfully!", "Success")
+        </script>
+    }
+    @if (TempData["deleted"] != null)
+    {
+        <script>
+            toastr["warning"]("User deleted successfully!", "Deleted")
         </script>
     }
 }

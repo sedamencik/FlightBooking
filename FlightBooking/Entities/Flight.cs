@@ -1,16 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FlightBooking.Models
+namespace FlightBooking.Entities
 {
     [Table("Flights")]
     public class Flight
     {
         [Key]
         public Guid Id { get; set; }
+        [Required]
+        public Route Route { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string Name { get; set; }
+        public Aircraft Aircraft { get; set; }
+
+        public DateTime FlightTime { get; set; }
     }
 }

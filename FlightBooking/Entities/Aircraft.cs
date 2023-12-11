@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FlightBooking.Models
+namespace FlightBooking.Entities
 {
-    [Table("Flights")]
-    public class Flight
+    [Table("Aircrafts")]
+    public class Aircraft
     {
         [Key]
         public Guid Id { get; set; }
@@ -12,5 +12,9 @@ namespace FlightBooking.Models
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
+
+        [Required]
+        public int SeatCount { get; set; }
+
     }
 }

@@ -43,6 +43,7 @@ namespace FlightBooking.Controllers
 
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
+
                     return RedirectToAction("Index", "Home");
                 }
                 else

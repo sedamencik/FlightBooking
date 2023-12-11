@@ -1,4 +1,5 @@
-﻿using FlightBooking.Models;
+﻿using FlightBooking.Entities;
+using FlightBooking.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -19,14 +20,16 @@ namespace FlightBooking.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<UserViewModel> users = new List<UserViewModel>();
+            List<User> users = new List<User>();
+            List<UserViewModel> usersVM = new List<UserViewModel>();
             HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/user/GetAll").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                users = JsonConvert.DeserializeObject<List<UserViewModel>>(data);
+                users = JsonConvert.DeserializeObject<List<User>>(data);
+                usersVM = users.Select(x => new UserViewModel { Email = x.Email, FullName = x.FullName, Id = x.Id, Role = x.Role }).ToList();
             }
-            return View(users);
+            return View(usersVM);
         }
 
         [HttpGet]
@@ -45,7 +48,7 @@ namespace FlightBooking.Controllers
                 HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "/user/Create", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    TempData["created"] = "User created successfully.";
+                    TempData["created"] = "ok";
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -53,5 +56,79 @@ namespace FlightBooking.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult Edit(Guid id)
+        {
+            User user = new User();
+            EditUserViewModel userVM = new EditUserViewModel();
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + $"/user/Get/{id}").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                user = JsonConvert.DeserializeObject<User>(data);
+                userVM = new EditUserViewModel
+                {
+                    Email = user.Email,
+                    FullName = user.FullName,
+                    Id = user.Id,
+                    Role = user.Role
+                };
+            }
+            return View(userVM);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string data = JsonConvert.SerializeObject(model);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + "/user/Edit", content).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["edited"] = "ok";
+                    return RedirectToAction(nameof(Index));
+                }
+
+            }
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult Delete(Guid id)
+        {
+            User user = new User();
+            UserViewModel userVM = new UserViewModel();
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + $"/user/Get/{id}").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                user = JsonConvert.DeserializeObject<User>(data);
+                if (user != null)
+                {
+                    userVM = new UserViewModel
+                    {
+                        Email = user.Email,
+                        FullName = user.FullName,
+                        Id = user.Id,
+                        Role = user.Role,
+                    };
+                }
+            }
+            return View(userVM);
+        }
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirm(Guid id)
+        {
+
+            HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + $"/user/Delete/{id}").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["deleted"] = "ok";
+                return RedirectToAction(nameof(Index));
+            }
+            TempData["error"] = "ok";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
