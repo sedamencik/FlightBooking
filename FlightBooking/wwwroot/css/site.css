@@ -18,7 +18,11 @@ body {
 }
 
 .rounded-half {
-    border-radius: 15%;
+    border-radius: 20%;
+}
+
+.bottom-text {
+    vertical-align: bottom;
 }
 
 .validation-summary-errors {
@@ -34,4 +38,3 @@ body {
         color: #842029;
         margin:0px;
     }
-

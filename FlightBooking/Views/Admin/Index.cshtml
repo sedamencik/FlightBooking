@@ -1,18 +1,53 @@
 ﻿@{
-    ViewData["Title"] = "Admin Page";
+    ViewData["Title"] = "Control Panel";
 }
 
 
 <div class="row">
-    <div class="col">
-        <h1 class="display-4">@ViewData["Title"]</h1>
+    <div class="col-4 offset-4">
+        <h1 class="display-4 border-bottom text-center pb-2"> @ViewData["Title"]  </h1>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-3 offset-4">
-        <div class="container-fluid ratio ratio-1x1 border border-3 rounded-half border-success d-inline-flex justify-content-center align-items-center">
-            deneme
-        </div>
+
+    <div class="col-3">
+        <a asp-controller="User" asp-action="Index">
+            <div class="row">
+                <div class="col container-fluid ratio ratio-1x1 border border-3 d-inline-flex rounded-half border-success bg-success bg-opacity-75">
+                    <div class="ms-1 row">
+                        <div class="col-12 display-1 text-center text-white mt-4">31</div>
+                        <h3 class="col-12 text-center text-white">Registered Users</h3>
+                    </div>
+                </div>
+            </div>
+        </a>
     </div>
+    <div class="col-1"></div>
+    <div class="col-3">
+        <a asp-controller="Flight" asp-action="Index">
+            <div class="row">
+                <div class="col container-fluid ratio ratio-1x1 border border-3 d-inline-flex rounded-half border-secondary bg-secondary bg-opacity-75">
+                    <div class="ms-1 row">
+                        <div class="col-12 display-1 text-center text-white mt-4">31</div>
+                        <h3 class="col-12 text-center text-white">Registered Flights</h3>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+        <div class="col-1"></div>
+    <div class="col-3">
+        <a asp-controller="Route" asp-action="Index">
+            <div class="row">
+                <div class="col container-fluid ratio ratio-1x1 border border-3 d-inline-flex rounded-half border-warning bg-warning bg-opacity-75">
+                    <div class="ms-1 row">
+                        <div class="col-12 display-1 text-center text-black mt-4">31</div>
+                        <h3 class="col-12 text-center text-black">Registered Routes</h3>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
 </div>

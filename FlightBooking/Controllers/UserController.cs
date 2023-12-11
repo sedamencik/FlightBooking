@@ -1,6 +1,7 @@
 ﻿using FlightBooking.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace FlightBooking.Controllers
 {
@@ -27,5 +28,30 @@ namespace FlightBooking.Controllers
             }
             return View(users);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(CreateUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string data = JsonConvert.SerializeObject(model);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "/user/Create", content).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["created"] = "User created successfully.";
+                    return RedirectToAction(nameof(Index));
+                }
+
+            }
+            return View(model);
+        }
+
     }
 }
