@@ -17,6 +17,8 @@ namespace FlightBooking.Controllers
         public IActionResult Index()
         {
             ViewData["userCount"] = _context.Users.Count().ToString();
+            ViewData["aircraftCount"] = _context.Aircrafts.Count().ToString();
+            ViewData["routeCount"] = _context.Routes.Count().ToString();
             return View();
         }
     }

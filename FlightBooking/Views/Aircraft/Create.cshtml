@@ -1,0 +1,36 @@
+﻿@model AircraftViewModel
+@{
+    ViewData["Title"] = "Add Aircraft";
+}
+
+<div class="row">
+    <div class="col-4 offset-4">
+        <h1 class="display-4 border-bottom text-center pb-2"> @ViewData["Title"]  </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-4 offset-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+
+            <div class="form-group form-floating mb-3">
+                <input asp-for="Name" class="form-control" placeholder="Aircraft Model" />
+                <label asp-for="Name" class="form-label">Aircraft Model</label>
+                <span asp-validation-for="Name" class="text-danger small"></span>
+            </div>
+
+            <div class="form-group form-floating mb-3">
+                <input asp-for="SeatCount" class="form-control" placeholder="Seat Count" type="number" />
+                <label asp-for="SeatCount" class="form-label">Seat Count</label>
+                <span asp-validation-for="SeatCount" class="text-danger small"></span>
+            </div>
+
+            <div class="form-group mb-3 d-grid">
+                <button type="submit" class="btn btn-primary">Add Aircraft</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+

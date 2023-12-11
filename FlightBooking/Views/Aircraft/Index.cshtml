@@ -1,0 +1,74 @@
+﻿@model List<AircraftViewModel>
+@{
+    ViewData["Title"] = "Aircrafts";
+}
+
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <h1 class="display-4 border-bottom text-center pb-2"> @ViewData["Title"]  </h1>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col">
+        <a asp-action="Create" class="btn btn-info btn-l fw-bold"><i class="fa fa-plus me-2"></i> Add New Aircraft </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <table class="table table-hover table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Aircraft Model</th>
+                    <th>Seat Count</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (AircraftViewModel aircraft in Model)
+                {
+                    <tr>
+                        <td>@aircraft.Name</td>
+                        <td>@aircraft.SeatCount</td>
+                        <td class="text-end">
+
+                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                <a asp-action="Edit" asp-route-id="@aircraft.Id" class="btn btn-success btn-sm fw-bold"><i class="fa fa-edit me-2"></i>Edit</a>
+                                <a asp-action="Delete" asp-route-id="@aircraft.Id" class="btn btn-danger btn-sm fw-bold"><i class="fa fa-trash me-2"></i>Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+
+    @if (TempData["error"] != null)
+    {
+        <script>
+            toastr["error"]("Something went wrong!", "Error")
+        </script>
+    }
+    @if (TempData["created"] != null)
+    {
+        <script>
+            toastr["success"]("Aircraft added successfully!", "Success")
+        </script>
+    }
+    @if (TempData["edited"] != null)
+    {
+        <script>
+            toastr["info"]("Aircraft updated successfully!", "Success")
+        </script>
+    }
+    @if (TempData["deleted"] != null)
+    {
+        <script>
+            toastr["warning"]("Aircraft deleted successfully!", "Deleted")
+        </script>
+    }
+}
