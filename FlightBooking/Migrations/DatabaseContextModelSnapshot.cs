@@ -38,7 +38,7 @@ namespace FlightBooking.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Aircrafts");
+                    b.ToTable("Aircrafts", (string)null);
                 });
 
             modelBuilder.Entity("FlightBooking.Entities.Flight", b =>
@@ -62,7 +62,7 @@ namespace FlightBooking.Migrations
 
                     b.HasIndex("RouteId");
 
-                    b.ToTable("Flights");
+                    b.ToTable("Flights", (string)null);
                 });
 
             modelBuilder.Entity("FlightBooking.Entities.Route", b =>
@@ -83,7 +83,7 @@ namespace FlightBooking.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Routes");
+                    b.ToTable("Routes", (string)null);
                 });
 
             modelBuilder.Entity("FlightBooking.Entities.User", b =>
@@ -117,7 +117,7 @@ namespace FlightBooking.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("FlightBooking.Entities.Flight", b =>

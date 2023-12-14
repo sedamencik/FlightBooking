@@ -19,6 +19,7 @@ namespace FlightBooking.Controllers
             ViewData["userCount"] = _context.Users.Count().ToString();
             ViewData["aircraftCount"] = _context.Aircrafts.Count().ToString();
             ViewData["routeCount"] = _context.Routes.Count().ToString();
+            ViewData["flightCount"] = _context.Flights.Count().ToString();
             return View();
         }
     }

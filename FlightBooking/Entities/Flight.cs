@@ -8,10 +8,8 @@ namespace FlightBooking.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        [Required]
         public Route Route { get; set; }
 
-        [Required]
         public Aircraft Aircraft { get; set; }
 
         public DateTime FlightTime { get; set; }

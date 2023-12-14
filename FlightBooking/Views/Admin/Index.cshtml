@@ -9,7 +9,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row ">
 
     <div class="col-3">
         <a asp-controller="User" asp-action="Index">
@@ -36,7 +36,7 @@
             </div>
         </a>
     </div>
-        <div class="col-1"></div>
+    <div class="col-1"></div>
     <div class="col-3">
         <a asp-controller="Route" asp-action="Index">
             <div class="row">
@@ -44,6 +44,19 @@
                     <div class="ms-1 row">
                         <div class="col-12 display-1 text-center text-black mt-4">@ViewData["routeCount"]</div>
                         <h3 class="col-12 text-center text-black">Registered Routes</h3>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-3 mt-4">
+        <a asp-controller="Flight" asp-action="Index">
+            <div class="row">
+                <div class="col container-fluid ratio ratio-1x1 border border-3 d-inline-flex rounded-half border-info bg-info bg-opacity-75">
+                    <div class="ms-1 row">
+                        <div class="col-12 display-1 text-center text-black mt-4">@ViewData["flightCount"]</div>
+                        <h3 class="col-12 text-center text-black">Registered Flights</h3>
                     </div>
                 </div>
             </div>
