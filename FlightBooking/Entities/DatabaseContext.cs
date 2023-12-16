@@ -12,5 +12,6 @@ namespace FlightBooking.Entities
         public DbSet<Aircraft> Aircrafts { get; set; }
         public DbSet<Route> Routes { get; set; }
         public DbSet<Flight> Flights { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using FlightBooking.Entities;
 using FlightBooking.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace FlightBooking.Controllers
 {
+    [Authorize(Roles = ("admin"))]
     public class RouteController : Controller
     {
         private readonly DatabaseContext _context;

@@ -1,6 +1,6 @@
 ﻿@model CreateFlightViewModel
 @{
-    ViewData["Title"] = "Update Flight";
+    ViewData["Title"] = "Delete Flight";
     List<RouteViewModel> routes = ViewBag.Routes;
     List<AircraftViewModel> aircrafts = ViewBag.Aircrafts;
 }
@@ -13,13 +13,13 @@
 
 <div class="row">
     <div class="col-4 offset-4">
-        <form asp-action="Edit" method="post">
+        <form asp-action="Delete" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
 
 
 
             <div class="form-group form-floating mb-3">
-                <select asp-for="RouteId" class="form-select">
+                <select asp-for="RouteId" class="form-select" disabled>
                     <option value="" selected>Please select...</option>
                     @if (routes != null)
                     {
@@ -34,10 +34,9 @@
                 <span asp-validation-for="RouteId" class="text-danger small"></span>
             </div>
 
-            <a asp-controller="Route" asp-action="Create" class="btn btn-info btn-l fw-bold mb-3"><i class="fa fa-plus me-2"></i> Add New Route </a>
 
             <div class="form-group form-floating mb-3">
-                <select asp-for="AircraftId" class="form-select">
+                <select asp-for="AircraftId" class="form-select" disabled>
                     <option value="" selected>Please select...</option>
                     @if (aircrafts != null)
                     {
@@ -52,16 +51,15 @@
                 <span asp-validation-for="AircraftId" class="text-danger small"></span>
             </div>
 
-            <a asp-controller="Aircraft" asp-action="Create" class="btn btn-info btn-l fw-bold mb-3"><i class="fa fa-plus me-2"></i> Add New Aircraft </a>
 
             <div class="form-group form-floating mb-3">
-                <input asp-for="FlightTime" class="form-control" id="theDate" placeholder="Flight Date" type="date" value="@Model.FlightTime.ToString("yyyy-MM-dd")" />
+                <input asp-for="FlightTime" class="form-control" id="theDate" placeholder="Flight Date" type="date" value="@Model.FlightTime.ToString("yyyy-MM-dd")" disabled />
                 <label asp-for="FlightTime" class="form-label">Flight Date</label>
                 <span asp-validation-for="FlightTime" class="text-danger small"></span>
             </div>
 
             <div class="form-group mb-3 d-grid">
-                <button type="submit" class="btn btn-primary">Update Flight</button>
+                <button type="submit" class="btn btn-danger">Delete Flight</button>
             </div>
 
         </form>

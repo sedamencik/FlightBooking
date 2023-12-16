@@ -1,21 +1,27 @@
-﻿using FlightBooking.Models;
+﻿using FlightBooking.Entities;
+using FlightBooking.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace FlightBooking.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly DatabaseContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DatabaseContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            ViewBag.UserName = User.FindFirstValue(ClaimTypes.Name);
+            List<FlightViewModel> flights = _context.Flights.Select(x => new FlightViewModel { Id = x.Id, Route = x.Route, Aircraft = x.Aircraft, FlightTime = x.FlightTime }).ToList();
+            return View(flights);
         }
 
         public IActionResult Privacy()

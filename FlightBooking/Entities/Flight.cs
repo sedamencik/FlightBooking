@@ -13,5 +13,7 @@ namespace FlightBooking.Entities
         public Aircraft Aircraft { get; set; }
 
         public DateTime FlightTime { get; set; }
+        public List<Ticket> Tickets { get; set; }
+
     }
 }

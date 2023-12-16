@@ -1,10 +1,13 @@
 ﻿using FlightBooking.Entities;
 using FlightBooking.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace FlightBooking.Controllers
 {
+    [Authorize(Roles = ("admin"))]
     public class FlightController : Controller
     {
         private readonly DatabaseContext _context;
@@ -92,39 +95,40 @@ namespace FlightBooking.Controllers
             LoadSubClasses();
             return View(model);
         }
-        //[HttpGet]
-        //public IActionResult Delete(Guid id)
-        //{
-        //    Aircraft aircraft = _context.Aircrafts.Find(id);
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            LoadSubClasses();
+            Flight flight = await _context.Flights.Include(f => f.Aircraft).Include(f => f.Route).FirstOrDefaultAsync(f => f.Id == id);
+            if (flight != null)
+            {
 
-        //    if (aircraft != null)
-        //    {
-        //        AircraftViewModel model = new AircraftViewModel
-        //        {
-        //            Id = aircraft.Id,
-        //            Name = aircraft.Name,
-        //            SeatCount = aircraft.SeatCount
-        //        };
-        //        return View(model);
-        //    }
-        //    TempData["error"] = "ok";
-        //    return RedirectToAction(nameof(Index));
-        //}
-        //[HttpPost, ActionName("Delete")]
-        //public async Task<IActionResult> DeleteConfirm(Guid id)
-        //{
-        //    Aircraft aircraft = _context.Aircrafts.Find(id);
-        //    if (aircraft != null)
-        //    {
-        //        _context.Aircrafts.Remove(aircraft);
-        //        _context.SaveChanges();
-        //        TempData["deleted"] = "ok";
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    TempData["error"] = "ok";
-        //    return RedirectToAction(nameof(Index));
-        //}
-        //}
+                CreateFlightViewModel model = new CreateFlightViewModel
+                {
+                    Id = flight.Id,
+                    AircraftId = flight.Aircraft.Id,
+                    RouteId = flight.Route.Id,
+                    FlightTime = flight.FlightTime
+                };
+                return View(model);
+            }
+            TempData["error"] = "ok";
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirm(Guid id)
+        {
+            Flight flight = _context.Flights.Find(id);
+            if (flight != null)
+            {
+                _context.Flights.Remove(flight);
+                _context.SaveChanges();
+                TempData["deleted"] = "ok";
+                return RedirectToAction(nameof(Index));
+            }
+            TempData["error"] = "ok";
+            return RedirectToAction(nameof(Index));
+        }
         public void LoadSubClasses()
         {
             ViewBag.Routes = _context.Routes.Select(x => new RouteViewModel { Id = x.Id, StartPoint = x.StartPoint, EndPoint = x.EndPoint }).ToList();

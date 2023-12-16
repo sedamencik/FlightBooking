@@ -26,5 +26,7 @@ namespace FlightBooking.Entities
         [Required]
         [StringLength(50)]
         public string Role { get; set; } = "user";
+
+        public List<Ticket> Tickets { get; set; }
     }
 }

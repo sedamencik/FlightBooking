@@ -33,7 +33,7 @@
                 @foreach (FlightViewModel flight in Model)
                 {
                     <tr>
-                        <td>@flight.Id</td>
+                        <td>@flight.Id.ToString().Substring(0,7).ToUpper()</td>
                         <td>@flight.Route.StartPoint</td>
                         <td>@flight.Route.EndPoint</td>
                         <td>@flight.Aircraft.Name</td>

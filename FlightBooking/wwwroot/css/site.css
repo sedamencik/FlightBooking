@@ -1,24 +1,31 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 .rounded-half {
     border-radius: 20%;
+}
+
+.container-soft {
+    border-radius: 30px;
+    background-color: cornsilk;
+    margin:25px;
+    padding:25px;
 }
 
 .bottom-text {
@@ -34,7 +41,8 @@ body {
     background-color: #f8d7da;
     border-color: #f5c2c7;
 }
+
     .validation-summary-errors ul {
         color: #842029;
-        margin:0px;
+        margin: 0px;
     }

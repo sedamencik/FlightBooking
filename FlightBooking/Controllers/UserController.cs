@@ -1,11 +1,14 @@
 ﻿using FlightBooking.Entities;
 using FlightBooking.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Data;
 using System.Text;
 
 namespace FlightBooking.Controllers
 {
+    [Authorize(Roles = ("admin"))]
     public class UserController : Controller
     {
         Uri baseUrl = new Uri("https://localhost:7257/api");
