@@ -63,4 +63,18 @@
         </a>
     </div>
 
+        <div class="col-1"></div>
+    <div class="col-3 mt-4">
+        <a asp-controller="Ticket" asp-action="Index">
+            <div class="row">
+                <div class="col container-fluid ratio ratio-1x1 border border-3 d-inline-flex rounded-half border-primary bg-primary bg-opacity-75">
+                    <div class="ms-1 row">
+                        <div class="col-12 display-1 text-center text-black mt-4">@ViewData["ticketCount"]</div>
+                        <h3 class="col-12 text-center text-black">Registered Tickets</h3>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
 </div>

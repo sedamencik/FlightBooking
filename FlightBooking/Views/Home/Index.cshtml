@@ -4,45 +4,71 @@
 }
 
 <div>
-    <h3 class="fw-light">Welcome @ViewBag.UserName</h3>
-    <h1 class="fw-light">Discover Our Flights</h1>
-    <h1 class="fw-light">Compare Cheap Flight Tickets and Buy Flight Ticket at Unicorn</h1>
+    <h3 class="fw-light">Welcome,</h3>
+    <h1 class="fw-light">Explore the Skies with Our Unbeatable Flight Deals!</h1>
+    <h1 class="fw-light">Your Gateway to Affordable and Exciting Travel Experiences!</h1>
 </div>
 
-<div class="container-soft">
-    <h3 class="fw-light">Welcome @ViewBag.UserName</h3>
-    <h1 class="fw-light">Discover Our Flights</h1>
-    <h1 class="fw-light">Compare Cheap Flight Tickets and Buy Flight Ticket at Unicorn</h1>
-</div>
+
 
 <div class="row">
     <div class="col">
-        <table class="table table-hover table-striped">
-            <thead>
-                <tr>
-                    <th>Flight Number</th>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Aircraft</th>
-                    <th>Seat Count</th>
-                    <th>Flight Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (FlightViewModel flight in Model)
-                {
-                    <a asp-controller="Flight" asp-action="Details" ></a>
-                    <tr>
-                        <td>@flight.Id.ToString().Substring(0,7).ToUpper()</td>
-                        <td>@flight.Route.StartPoint</td>
-                        <td>@flight.Route.EndPoint</td>
-                        <td>@flight.Aircraft.Name</td>
-                        <td>@flight.Aircraft.SeatCount</td>
-                        <td>@flight.FlightTime.ToString("dddd, dd MMMM yyyy")</td>
+        <div class="row flight-headers">
+            <div class="col-2">Flight Number</div>
+            <div class="col-2">From</div>
+            <div class="col-2">To</div>
+            <div class="col-2">Aircraft</div>
+            <div class="col-2">Seat Count</div>
+            <div class="col-2">Flight Date</div>
+        </div>
 
-                    </tr>
-                }
-            </tbody>
-        </table>
+
+        @foreach (FlightViewModel flight in Model)
+        {
+            <a class="text-decoration-none text-black" asp-controller="Flight" asp-action="Details" asp-route-id="@flight.Id">
+                <div class="row flight-list-item">
+                    <div class="col-2">@flight.Id.ToString().Substring(0,7).ToUpper()</div>
+                    <div class="col-2">@flight.Route.StartPoint</div>
+                    <div class="col-2">@flight.Route.EndPoint</div>
+                    <div class="col-2">@flight.Aircraft.Name</div>
+                    <div class="col-2">@flight.Aircraft.SeatCount</div>
+                    <div class="col-2">@flight.FlightTime.ToString("dddd, dd MMMM yyyy")</div>
+                </div>
+            </a>
+        }
+
+
     </div>
 </div>
+
+<div class="container-soft text-center">
+    <h1 class="fw-light">Join SkyMiles Rewards: Earn Points with Every Flight!</h1>
+    <h1 class="fw-light">Enjoy VIP Treatment with Our Limited Special Upgrade!</h1>
+</div>
+@section Scripts{
+
+    @if (TempData["error"] != null)
+    {
+                <script>
+                    toastr["error"]("Something went wrong!", "Error")
+                </script>
+    }
+    @if (TempData["bought"] != null)
+    {
+                <script>
+                    toastr["success"]("Seat bought successfully!", "Success")
+                </script>
+    }
+    @if (TempData["edited"] != null)
+    {
+                <script>
+                    toastr["info"]("Flight updated successfully!", "Success")
+                </script>
+    }
+    @if (TempData["deleted"] != null)
+    {
+                <script>
+                    toastr["warning"]("Flight deleted successfully!", "Deleted")
+                </script>
+    }
+}

@@ -13,7 +13,8 @@ namespace FlightBooking.Entities
         public Aircraft Aircraft { get; set; }
 
         public DateTime FlightTime { get; set; }
-        public List<Ticket> Tickets { get; set; }
+        public int AvailableSeatCount { get; set; }
+        public List<Ticket> Tickets { get; set; } = new List<Ticket>();
 
     }
 }

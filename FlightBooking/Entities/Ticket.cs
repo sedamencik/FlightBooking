@@ -12,8 +12,10 @@ namespace FlightBooking.Entities
         [Required]
         public int TicketNumber { get; set; }
 
-        public Guid UserId { get; set; }
-        public User User { get; set; }
+        public bool IsAvailable { get; set; } = true;
+
+        public Guid? UserId { get; set; }
+        public User? User { get; set; }
 
         public Guid FlightId { get; set; }
         public Flight Flight { get; set; }

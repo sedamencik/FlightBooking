@@ -1,0 +1,63 @@
+﻿@model BookingViewModel
+@{
+    ViewData["Title"] = "FlightDetails";
+    int counter = 0;
+}
+
+
+
+<div class="row text-center">
+    <div class="col-3">
+        <h1 class="fw-normal">Flight Number</h1>
+    </div>
+    <div class="col-3">
+        <h1 class="fw-normal">Aircraft Model</h1>
+    </div>
+    <div class="col-3">
+    </div>
+    <div class="col-3">
+        <h1 class="fw-normal">Destination</h1>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-3">
+        <h2 class="fw-light">@Model.Flight.Id.ToString().Substring(0,7).ToUpper()</h2>
+    </div>
+    <div class="col-3">
+        <h2 class="fw-light">@Model.Flight.Aircraft.Name</h2>
+    </div>
+    <div class="col-3">
+    </div>
+    <div class="col-3">
+        <h2 class="fw-light"><i class="fa-solid fa-plane-departure me-3"></i>@Model.Flight.Route.StartPoint</h2>
+        <h2 class="fw-light"><i class="fa-solid fa-plane-arrival me-3"></i>@Model.Flight.Route.EndPoint</h2>
+    </div>
+</div>
+
+<div class="row">
+    @foreach (var seat in Model.SeatLayout)
+    {
+        counter++;
+        if ((counter - 3) % 4 == 0)
+        {
+            <div class="col-4"></div>
+        }
+        <div class="col-2 text-center">
+
+
+            <form method="post" asp-action="BookSeat">
+                <input type="hidden" name="flightId" value="@Model.Flight.Id" />
+                <input type="hidden" name="seatNumber" value="@seat.SeatNumber" />
+                <button class="btn @(seat.IsAvailable ? "btn-success" : "btn-danger") p-2 m-2" type="submit" @(seat.IsAvailable ? "" : "disabled")>
+                    <img src="~/img/seat.png" width="50%" />
+                   <div>
+                        Seat @seat.SeatNumber
+                   </div> 
+                    @(seat.IsAvailable ? "Available" : "Booked")
+                </button>
+            </form>
+
+        </div>
+    }
+
+</div>

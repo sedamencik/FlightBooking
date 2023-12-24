@@ -1,0 +1,67 @@
+﻿@model List<TicketViewModel>
+@{
+    ViewData["Title"] = "My Tickets";
+}
+
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <h1 class="display-4 border-bottom text-center pb-2"> @ViewData["Title"]  </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <table class="table table-hover table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Flight Number</th>
+                    <th>Owner</th>
+                    <th>Route</th>
+                    <th>Seat Number</th>
+                    <th>Flight Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (TicketViewModel ticket in Model)
+                {
+                    <tr>
+                        <td>@ticket.Flight.Id.ToString().Substring(0,7).ToUpper()</td>
+                        <td>@ticket.User.FullName</td>
+                        <td>@ticket.Flight.Route.StartPoint -> @ticket.Flight.Route.EndPoint</td>
+                        <td>@ticket.TicketNumber</td>
+                        <td>@ticket.Flight.FlightTime.ToString("dddd, dd MMMM yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+
+    @if (TempData["error"] != null)
+    {
+        <script>
+            toastr["error"]("Something went wrong!", "Error")
+        </script>
+    }
+    @if (TempData["created"] != null)
+    {
+        <script>
+            toastr["success"]("Ticket added successfully!", "Success")
+        </script>
+    }
+    @if (TempData["edited"] != null)
+    {
+        <script>
+            toastr["info"]("Ticket updated successfully!", "Success")
+        </script>
+    }
+    @if (TempData["deleted"] != null)
+    {
+        <script>
+            toastr["warning"]("Ticket deleted successfully!", "Deleted")
+        </script>
+    }
+}

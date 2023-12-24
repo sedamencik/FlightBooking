@@ -4,6 +4,7 @@ using FlightBooking.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlightBooking.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20231207182136_PropertyAdd")]
+    partial class PropertyAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,9 +51,6 @@ namespace FlightBooking.Migrations
 
                     b.Property<Guid>("AircraftId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("AvailableSeatCount")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("FlightTime")
                         .HasColumnType("datetime2");
@@ -104,7 +103,7 @@ namespace FlightBooking.Migrations
                     b.Property<int>("TicketNumber")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -179,7 +178,9 @@ namespace FlightBooking.Migrations
 
                     b.HasOne("FlightBooking.Entities.User", "User")
                         .WithMany("Tickets")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Flight");
 

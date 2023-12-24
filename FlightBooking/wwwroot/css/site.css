@@ -21,6 +21,24 @@ body {
     border-radius: 20%;
 }
 
+.flight-list-item {
+    border-radius: 10px;
+    margin: 5px;
+    padding: 5px;
+    text-align:justify-all;
+}
+.flight-list-item:hover {
+    background-color:blanchedalmond;
+    
+}
+.flight-headers {
+    margin: 5px;
+    padding: 5px;
+    text-align: justify-all;
+    font-size:20px;
+    font-weight:bold;
+}
+
 .container-soft {
     border-radius: 30px;
     background-color: cornsilk;
