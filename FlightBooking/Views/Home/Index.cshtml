@@ -3,6 +3,10 @@
     ViewData["Title"] = "Home Page";
 }
 
+
+
+
+
 <div>
     <h3 class="fw-light">Welcome,</h3>
     <h1 class="fw-light">Explore the Skies with Our Unbeatable Flight Deals!</h1>
@@ -41,34 +45,38 @@
     </div>
 </div>
 
-<div class="container-soft text-center">
+<div class="container-soft text-center" style="background-color:#b5cbd6">
     <h1 class="fw-light">Join SkyMiles Rewards: Earn Points with Every Flight!</h1>
     <h1 class="fw-light">Enjoy VIP Treatment with Our Limited Special Upgrade!</h1>
 </div>
+
+
+
+
 @section Scripts{
 
     @if (TempData["error"] != null)
     {
-                <script>
-                    toastr["error"]("Something went wrong!", "Error")
-                </script>
+        <script>
+            toastr["error"]("Something went wrong!", "Error")
+        </script>
     }
     @if (TempData["bought"] != null)
     {
-                <script>
-                    toastr["success"]("Seat bought successfully!", "Success")
-                </script>
+        <script>
+            toastr["success"]("Seat bought successfully!", "Success")
+        </script>
     }
     @if (TempData["edited"] != null)
     {
-                <script>
-                    toastr["info"]("Flight updated successfully!", "Success")
-                </script>
+        <script>
+            toastr["info"]("Flight updated successfully!", "Success")
+        </script>
     }
     @if (TempData["deleted"] != null)
     {
-                <script>
-                    toastr["warning"]("Flight deleted successfully!", "Deleted")
-                </script>
+        <script>
+            toastr["warning"]("Flight deleted successfully!", "Deleted")
+        </script>
     }
 }

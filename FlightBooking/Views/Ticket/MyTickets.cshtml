@@ -1,6 +1,6 @@
 ﻿@model List<TicketViewModel>
 @{
-    ViewData["Title"] = "My Tickets";
+    //ViewData["Title"] = "My Tickets";
 }
 
 
@@ -11,9 +11,16 @@
 </div>
 
 <div class="row">
-    <div class="col">
-        <table class="table table-hover table-striped table-sm">
-            <thead>
+    @if(Model.Count ==0)
+    {
+        <p>Biletin yok</p>
+
+    }else
+    {
+        <div class="col table-users" style="background-color: #b5cbd6">
+            <div class="header">My Tickets</div>
+        <table class="table table-hover table-striped table-sm" cellspacing="0">
+            <thead style="text-align:center">
                 <tr>
                     <th>Flight Number</th>
                     <th>Owner</th>
@@ -36,6 +43,8 @@
             </tbody>
         </table>
     </div>
+        
+    }
 </div>
 
 @section Scripts{

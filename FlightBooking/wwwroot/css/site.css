@@ -1,3 +1,5 @@
+$baseColor: #398B93;
+
 html {
     font-size: 14px;
 }
@@ -15,8 +17,17 @@ html {
 
 body {
     margin-bottom: 60px;
+    background-image: url('../img/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
+
+
+
+.header-color {
+    color: aqua;
+}
 .rounded-half {
     border-radius: 20%;
 }
@@ -64,3 +75,65 @@ body {
         color: #842029;
         margin: 0px;
     }
+
+
+
+.header {
+    background-color: darken($baseColor, 5%);
+    color: white;
+    font-size: 1.5em;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.table-users {
+    border: 1px solid darken($baseColor, 5%);
+    border-radius: $borderRadius;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+    max-width: calc(100% - 2em);
+    margin: 1em auto;
+    overflow: hidden;
+    width: 800px;
+}
+
+table {
+    width: 100%;
+    td, th
+
+{
+    color: darken($baseColor, 10%);
+    padding: $padding;
+}
+
+td {
+    text-align: center;
+    vertical-align: middle;
+    &:last-child
+
+{
+    font-size: 0.95em;
+    line-height: 1.4;
+    text-align: left;
+}
+
+}
+
+th {
+    background-color: lighten($baseColor, 50%);
+    font-weight: 300;
+}
+
+tr {
+    &:nth-child(2n)
+
+{
+    background-color: white;
+}
+
+&:nth-child(2n+1) {
+    background-color: lighten($baseColor, 55%)
+}
+
+}
+}

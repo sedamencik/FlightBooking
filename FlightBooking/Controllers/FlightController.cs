@@ -169,6 +169,7 @@ namespace FlightBooking.Controllers
             TempData["error"] = "ok";
             return RedirectToAction("Index", "Home");
         }
+        [Authorize]
         [HttpPost]
         public IActionResult BookSeat(Guid flightId, int seatNumber, Guid seatId)
         {
