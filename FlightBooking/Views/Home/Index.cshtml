@@ -8,14 +8,25 @@
 
 
 <div>
-    <h3 class="fw-light">Welcome,</h3>
-    <h1 class="fw-light">Explore the Skies with Our Unbeatable Flight Deals!</h1>
-    <h1 class="fw-light">Your Gateway to Affordable and Exciting Travel Experiences!</h1>
+    <h3 class="fw-light">@_localization.Getkey("Welcome").Value</h3>
+    <h1 class="fw-light">@_localization.Getkey("Welcome2").Value</h1>
+    <h1 class="fw-light">@_localization.Getkey("Welcome3").Value</h1>
+</div>
+
+<div class="toggleButtonContainer">
+
+<div class="toggleContainer">
+        <span>@_localization.Getkey("EyeButton").Value</span>
+   
+    <button id="toggleButton" onclick="toggleVisibility()" class="eyeButton">
+        <img id="eyeIcon" src="~/img/openeye.jpg" alt="Açık Göz" class="eyeButton" />
+    </button>
+
+</div>
 </div>
 
 
-
-<div class="row">
+<div id="toggleDiv" class="row hidden">
     <div class="col">
         <div class="row flight-headers">
             <div class="col-2">Flight Number</div>
@@ -46,8 +57,8 @@
 </div>
 
 <div class="container-soft text-center" style="background-color:#b5cbd6">
-    <h1 class="fw-light">Join SkyMiles Rewards: Earn Points with Every Flight!</h1>
-    <h1 class="fw-light">Enjoy VIP Treatment with Our Limited Special Upgrade!</h1>
+    <h1 class="fw-light">@_localization.Getkey("Join").Value</h1>
+    <h1 class="fw-light">@_localization.Getkey("Join2").Value</h1>
 </div>
 
 

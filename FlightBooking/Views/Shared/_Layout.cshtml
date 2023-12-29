@@ -10,6 +10,11 @@
     <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FlightBooking.styles.css" asp-append-version="true" />
+
+    
+
+
+
 </head>
 <body>
     <header>
@@ -41,6 +46,31 @@
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Log out<i class="fa-solid fa-right-from-bracket ms-2"></i></a>
+                            </li>
+                            <li>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                        Localization
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a asp-controller="Home" 
+                                            asp-action="ChangeLanguage" 
+                                            asp-route-culture="en-US" 
+                                            class="dropdown-item">
+                                                <i class="flag-icon flag-icon-gb"></i> English
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-controller="Home" 
+                                            asp-action="ChangeLanguage" 
+                                            asp-route-culture="tr-TR" 
+                                            class="dropdown-item">
+                                                <i class="flag-icon flag-icon-gb"></i> Türkçe
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                         }
                         else
@@ -75,6 +105,24 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/toastr.js/toastr.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+  
+            function toggleVisibility() {
+                var toggleDiv = document.getElementById("toggleDiv");
+                var eyeIcon = document.getElementById("eyeIcon");
+
+                if (toggleDiv.classList.contains("hidden")) {
+                    // Eğer gizli ise
+                    toggleDiv.classList.remove("hidden");
+                    eyeIcon.src = "@Url.Content("~/img/closeeye.jpg")"; // Kapalı göz ikonu
+                } else {
+                    // Eğer görünür ise
+                    toggleDiv.classList.add("hidden");
+                    eyeIcon.src = "@Url.Content("~/img/openeye.jpg")"; // Açık göz ikonu
+                }
+            }
+    </script>
+        
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

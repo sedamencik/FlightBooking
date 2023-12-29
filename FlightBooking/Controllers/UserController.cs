@@ -11,7 +11,7 @@ namespace FlightBooking.Controllers
     [Authorize(Roles = ("admin"))]
     public class UserController : Controller
     {
-        Uri baseUrl = new Uri("https://localhost:7257/api");
+        Uri baseUrl = new Uri("https://localhost:44359/api");
         private readonly HttpClient _client;
 
         public UserController(HttpClient client)
